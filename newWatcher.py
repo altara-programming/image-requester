@@ -160,7 +160,7 @@ def startWorkers(sg, window, getImageTimer):
     # -- Start the GUI passing in the Queue to print the thread message in the main MultiLine window--
     sg.cprint_set_output_destination(window, '-ML-')
 
-    window['-ML-'].update(visible=False) #can make false to hide threadlog
+    window['-ML-'].update(visible=True) #can make false to hide threadlog
     colors = {'GetImageThread': ('white', 'red'), 'DisplayImageThread': ('white', 'green')}
 
 def grabber_main():
