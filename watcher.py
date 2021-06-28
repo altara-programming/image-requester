@@ -12,6 +12,7 @@ import time
 from requests.auth import HTTPBasicAuth
 
 #TekVizion Watcher v0.1 - currently working on v0.2
+#url = "http://10.1.53.83/screencapture"
 
 """
     TekVizion Image Grabber
@@ -56,7 +57,7 @@ def get_image_via_url_and_display(myConfig, window):
 
     #time1 before sending the get request to the server
     time1 = datetime.datetime.now() #get current time before request
-    get_time = ('getImageViaUrlAndDisplay  get image start time =' + time1.strftime("%Y-%m-%d-%H-%M-%S.%f")[:-3])
+    get_time = ('getImageViaUrlAndDisplay: get image start time = ' + time1.strftime("%Y-%m-%d-%H-%M-%S.%f")[:-3])
     #response = requests.get(url, stream=True)
     response = None
 
@@ -75,7 +76,7 @@ def get_image_via_url_and_display(myConfig, window):
 
     #time2 after we received a response from the server
     time2 = datetime.datetime.now()
-    current_time = ('getImageViaUrlAndDisplay  after get image  time =' + time2.strftime(
+    current_time = ('getImageViaUrlAndDisplay: after get image  time = ' + time2.strftime(
         "%Y-%m-%d-%H-%M-%S.%f")[:-3])
 
     #time to get the image was
@@ -192,7 +193,7 @@ def startWorkers(sg, window, getImageTimer):
     # -- Start the GUI passing in the Queue to print the thread message in the main MultiLine window--
     sg.cprint_set_output_destination(window, '-ML-')
 
-    window['-ML-'].update(visible=True) #can make false to hide threadlog
+    window['-ML-'].update(visible=False) #can make false to hide threadlog
     colors = {'GetImageThread': ('white', 'red'), 'DisplayImageThread': ('white', 'green')}
 
 
@@ -225,8 +226,8 @@ def grabber_main():
         [sg.T(' ', background_color=HTTPRED, text_color='white', k='-TITLEBAR-', size=(115, 1),
                  justification='center')
          ],
-        [sg.T("         "), sg.Radio('http://', "RADIO", text_color="white", default=True, key="-IN-")],
-        [sg.T("         "), sg.Radio('https://', "RADIO", text_color="white", default=False)],
+        #[sg.T("         "), sg.Radio('http://', "RADIO", text_color="white", default=True, key="-IN-")],
+        #[sg.T("         "), sg.Radio('https://', "RADIO", text_color="white", default=False)],
         [sg.Text('Server Address: ', size=(20, 1), text_color="white") , sg.InputText(key='-SERVER-', size=(40, 1), do_not_clear=True)],
         [sg.Text('User Name: ', size=(20, 1), text_color="white"), sg.InputText(key='-NAME-', size=(40, 1), do_not_clear=True)],
         [sg.Text('Password: ', size=(20, 1), text_color="white"), sg.InputText(key='-PASSWORD-', password_char='*', size=(40, 1), do_not_clear=True)],
@@ -300,7 +301,7 @@ def grabber_main():
                 startWorkers(sg, window, getImageTimer)
 
                 #Disable the submit button now, since the program is running.
-                window.FindElement('-SUBMIT-').Update(disabled=True, button_color='#b9b2b2')
+                #window.FindElement('-SUBMIT-').Update(disabled=True, button_color='#b9b2b2')
 
             else:
                 sg.SetOptions(  # window_location=(700, 400),
