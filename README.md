@@ -1,8 +1,8 @@
-# image-requester
+# image-requester-draft
 
 ##########################################################
 #
-# Program: Image Requester
+# Program: Image Requester Draft 
 #
 # Python 3.9
 # 
